@@ -1,0 +1,19 @@
+<program> -> <iden> <command> <main> <start> <stmt_list> <end>
+<iden> -> [a-zA-z]+ [0-9]*
+<command> -> :
+<main> -> Main
+<start> -> start
+<end> -> end
+<stmt_list> -> <stmt> <white_space> | <stmt> <white_space> <stmt_list>
+<stmt> -> <declaration> | <assignment> | <if_stmt> | <while_stmt> | <input> | <output>
+<declaration> -> <var> <iden> <command> <type>
+<var> -> var
+<type> -> int | dec | bln | str | chr
+<assignment> -> <iden> <assignOp> <value>
+<assignOp> -> :=
+<if_stmt> -> <if> <command> <rel_expr> <then> <stmt_list> <end_if> | <if> <command> <rel_expr> <then> <stmt_list> <else> <stmt_list> <end_if>
+<if> -> if
+<then> -> then
+<end_if> -> fi
+<else> -> else
+<while_stmt> -> <while> <command> <rel_expr> <stmt_list> <end_while>
