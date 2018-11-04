@@ -1,0 +1,38 @@
+<add> -> +
+<sub> -> -
+<mul> -> *
+<intDiv> -> /
+<expo> -> ^
+<floatDiv> -> div
+<lt> -> <
+<gt> -> >
+<equal> -> =
+<ne> -> <>
+<lte> -> <=
+<gte> -> >=
+<assignOp> -> :=
+<or> -> OR
+<and> -> AND
+<stringDT> -> str | chr
+<iden> -> var
+<start> -> start
+<end> -> end
+<modulo> -> rem
+<if> -> if
+<loop> -> loop | while | do
+<numDT> -> int | dec
+<boolean> -> bln
+<command> -> :
+<main> -> main
+<else> -> else
+<ifEnd> -> fi
+<loopEnd> -> finish_loop | finish_while | finish
+<switch> -> select
+<case> -> when
+<switchEnd> -> finish_select
+<print> -> print
+<boolean_const> -> TRUE | FALSE
+<char_const> -> A-Z | a-z
+<int_const> -> 0-9
+<iden> -> [a-z][a-z]*[0-1]*
+//pacheck nalang ginawan ko tong tokens im beginner eeee
