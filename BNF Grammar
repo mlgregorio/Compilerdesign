@@ -28,3 +28,5 @@
 <output> -> <print> <open_paren> <value> <close_paren>
 <rel_expr> -> <term> <relOp> <term>
 <term> -> <iden> | <value> 
+<math_expr> -> <term> <op> <term>
+<assignment> -> <iden> <assignOP> <value>
