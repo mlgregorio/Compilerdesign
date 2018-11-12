@@ -16,7 +16,7 @@
 <then> -> then
 <end_if> -> fi
 <else> -> else
-<while_stmt> -> <while> <command> <rel_expr> <stmt_list> <end_while
+<while_stmt> -> <while> <command> <rel_expr> <stmt_list> <end_while>
 --------------------------------------------------------------------
 <program> -> <iden> <command> <main> <start> <stmt_list> <end>
 <stmt_list> -> <stmt> <white_space> | <stmt> <white_space> <stmt_list>
