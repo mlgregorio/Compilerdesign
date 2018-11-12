@@ -35,4 +35,3 @@
 <char_const> -> A-Z | a-z
 <int_const> -> 0-9
 <iden> -> [a-z][a-z]*[0-1]*
-//pacheck nalang ginawan ko tong tokens im beginner eeee
