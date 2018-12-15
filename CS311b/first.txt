@@ -1,0 +1,39 @@
+<iden>	<iden>
+<colon>	<colon>
+<main>	<main>
+<start>	<start>
+<end>	<end>
+ε	ε
+<value>	<value>
+<var>	<var>
+<type>	<type>
+<assignOp>	<assignOp>
+<arithOp>	<arithOp>
+<if>	<if>
+<open_paren>	<open_paren>
+<close_paren>	<close_paren>
+<then>	<then>
+<ifEnd>	<ifEnd>
+<while>	<while>
+<whileEnd>	<whileEnd>
+<relOp>	<relOp>
+<scan>	<scan>
+<print>	<print>
+<program>	<iden>
+<stmt_list'>	ε, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>
+<term>	<iden>, <value>
+<declaration>	<var>
+<initVal>	<iden>, ε
+<assignment>	<iden>
+<expr'>	<arithOp>, ε
+<expr2'>	<arithOp>, ε
+<if_stmt>	<if>
+<while_stmt>	<while>
+<input>	<scan>
+<output>	<print>
+<stmt>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>
+<expr2>	<iden>, <value>
+<rel_expr>	<iden>, <value>
+<expr>	<iden>, <value>
+<math_expr>	<iden>, <value>
+<stmt_list>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>

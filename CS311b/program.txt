@@ -1,0 +1,9 @@
+program:Main
+    start
+        var num:int := 2
+        var num1:int := 2
+        if:(num > num1)
+            then
+                num := num + num1
+        fi
+    end

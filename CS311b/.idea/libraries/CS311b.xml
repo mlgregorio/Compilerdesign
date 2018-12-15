@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CS311b">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/CS311b.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

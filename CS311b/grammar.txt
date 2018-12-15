@@ -1,0 +1,22 @@
+<program> -> <iden> <colon> <main> <start> <stmt_list> <end>
+<stmt_list> -> <stmt> <stmt_list'>
+<stmt_list'> -> <stmt> <stmt_list'>
+<stmt_list'> -> EPSILON
+<stmt> -> <declaration> | <assignment> | <if_stmt> | <math_expr> | <while_stmt> | <input> | <output>
+<term> -> <iden> | <value>
+<declaration> -> <var> <initVal>
+<initVal> -> <iden> <colon> <type> <assignOp> <expr>
+<initVal> -> EPSILON
+<assignment> -> <iden> <assignOp> <expr> | <iden> <assignOp> <input>
+<expr> -> <expr2> <expr'>
+<expr'> -> <arithOp> <expr2> <expr'>
+<expr'> -> EPSILON
+<expr2> -> <term> <expr2'>
+<expr2'> -> <arithOp> <term> <expr2'>
+<expr2'> -> EPSILON
+<if_stmt> -> <if> <colon> <open_paren> <rel_expr> <close_paren> <then> <stmt_list'> <ifEnd>
+<while_stmt> -> <while> <colon> <open_paren> <rel_expr> <close_paren> <stmt_list'> <whileEnd>
+<math_expr> -> <expr>
+<rel_expr> -> <term> <relOp> <term>
+<input> -> <scan> <open_paren> <close_paren>
+<output> -> <print> <open_paren> <term> <close_paren>
