@@ -1,9 +1,16 @@
 program:Main
     start
-        var num:int := 2
-        var num1:int := 2
-        if:(num > num1)
-            then
-                num := num + num1
+        var num:int 
+        num := scan()
+        var num1:int
+        num1 := 6
+        print(num)
+        if:(num1 > num)
+        then
+        print("Yes")
         fi
+        while:(num < num1)
+            print("its done")
+            num1 := num1 - 1
+        done
     end

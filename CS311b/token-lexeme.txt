@@ -5,16 +5,17 @@
 <end> -> end
 <scan> -> scan
 <var> -> var
-<value> -> -?[0-9]+
+<number> -> -?[0-9]+
+<str> -> "[a-zA-Z0-9_\ ]*"
 <if> -> if
 <then> -> then
 <ifEnd> -> fi
 <while> -> while
 <whileEnd> -> done
 <print> -> print
-<type> -> int|dec|bln|str|bln|str|chr
+<type> -> int|bln|str|bln|str|chr
 <close_paren> -> \)
 <open_paren> -> \(
-<arithOp> -> \+|\-|\/|\* 
-<relOp> -> =|<|>|<>|<=|>=
+<arithOp> -> \+|\-|\/|\* s
+<relOp> -> <=|>=|<>|=|>|<
 <iden> -> [a-z][a-zA-Z0-9_]*

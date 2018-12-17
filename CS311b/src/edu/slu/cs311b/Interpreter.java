@@ -100,10 +100,6 @@ abstract class STMT {
                 return new STMT_4(sym);
             case 9:
                 return new STMT_5(sym);
-            case 10:
-                return new STMT_6(sym);
-            case 11:
-                return new STMT_7(sym);
             default:
                 return null;
         }
@@ -131,7 +127,7 @@ class STMT_2 extends STMT {
     ASSIGNMENT assignment;
 
     public STMT_2(Symbol lhs) {
-        assignment = ASSIGNMENT.construct(lhs.children.get(0));
+        assignment =  new ASSIGNMENT(lhs.children.get(0));
     }
 
     @Override
@@ -155,27 +151,12 @@ class STMT_3 extends STMT {
         if_stmt.interpret();
     }
 }
-// Rule No. 8:<stmt> → <math_expr>
+// Rule No. 8:<stmt> → <while_stmt>
 class STMT_4 extends STMT {
-
-    MATH_EXPR math_expr;
-
-    public STMT_4(Symbol lhs) {
-        math_expr = new MATH_EXPR(lhs.children.get(0));
-    }
-
-    @Override
-    public void interpret() {
-        System.out.println("math_expr.interpret()");
-        math_expr.interpret();
-    }
-}
-// Rule No. 9:<stmt> → <while_stmt>
-class STMT_5 extends STMT {
 
     WHILE_STMT while_stmt;
 
-    public STMT_5(Symbol lhs) {
+    public STMT_4(Symbol lhs) {
         while_stmt = new WHILE_STMT(lhs.children.get(0));
     }
 
@@ -185,27 +166,13 @@ class STMT_5 extends STMT {
         while_stmt.interpret();
     }
 }
-// Rule No. 10:<stmt> → <input>
-class STMT_6 extends STMT {
 
-    INPUT input;
-
-    public STMT_6(Symbol lhs) {
-        input = new INPUT(lhs.children.get(0));
-    }
-
-    @Override
-    public void interpret() {
-        System.out.println("input.interpret()");
-        input.interpret();
-    }
-}
-// Rule No. 11:<stmt> → <output>
-class STMT_7 extends STMT {
+// Rule No. 9:<stmt> → <output>
+class STMT_5 extends STMT {
 
     OUTPUT output;
 
-    public STMT_7(Symbol lhs) {
+    public STMT_5(Symbol lhs) {
         output = new OUTPUT(lhs.children.get(0));
     }
 
@@ -219,9 +186,9 @@ class STMT_7 extends STMT {
 abstract class TERM {
     public static TERM construct(Symbol sym){
         switch (sym.ruleNo){
-            case 12:
+            case 10:
                 return new TERM_1(sym);
-            case 13:
+            case 11:
                 return new TERM_2(sym);
             default:
                 return null;
@@ -229,145 +196,160 @@ abstract class TERM {
     }
     public abstract Object interpret();
 }
-// Rule No. 12:<term> → <iden>
+// Rule No. 10:<term> → <iden>
 class TERM_1 extends TERM {
 
-    Variable iden;
+    String iden;
 
     public TERM_1(Symbol lhs) {
-        iden = Variable.symbolTable.get(lhs.children.get(0).lexeme);
+        iden = lhs.children.get(0).lexeme;
     }
 
     @Override
     public Object interpret() {
-        return iden.value;
+        Variable var = Variable.symbolTable.get(iden);
+        return var.value;
     }
+    
 }
-// Rule No. 13:<term> → <value>
+// Rule No. 11:<term> → <value>
 class TERM_2 extends TERM {
 
-    String const1;
+    VALUE value;
 
     public TERM_2(Symbol lhs) {
-        const1 = lhs.children.get(0).lexeme;
+        value = VALUE.construct(lhs.children.get(0));
     }
 
     @Override
     public Object interpret() {
-        return Integer.parseInt(const1);
+        return value.interpret();
     }
 }
 
-// Rule No. 14:<declaration> → <var> <initVal>
+abstract class VALUE {
+    public static VALUE construct(Symbol sym){
+        switch (sym.ruleNo){
+            case 12:
+                return new VALUE_1(sym);
+            case 13:
+                return new VALUE_2(sym);
+            default:
+                return null;
+        }
+    }
+    public abstract Object interpret();
+}
+// Rule No. 12:<value> → <str>
+class VALUE_1 extends VALUE {
+
+    String value;
+
+    public VALUE_1(Symbol lhs) {
+        value = lhs.children.get(0).lexeme;
+    }
+
+    @Override
+    public Object interpret() {
+        return value;
+    }
+}
+// Rule No. 13:<value> → <number>
+class VALUE_2 extends VALUE {
+
+    String value;
+
+    public VALUE_2(Symbol lhs) {
+        value = lhs.children.get(0).lexeme;
+    }
+
+    @Override
+    public Object interpret() {
+        return Integer.parseInt(value);
+    }
+}
+
+// Rule No. 14:<declaration> → <var> <iden> <colon> <type>
 class DECLARATION {
-    INITVAL initVal;
+    String iden;
+    String type;
     
     public DECLARATION(Symbol lhs){
-        initVal = INITVAL.construct(lhs.children.get(1));
+        iden = lhs.children.get(1).lexeme;
+        type = lhs.children.get(3).lexeme;
     }
     
     public void interpret() {
-        initVal.interpret();
+       Variable var = new Variable(iden, type, -1);
     }
 }
 
-abstract class INITVAL {
-    public static INITVAL construct(Symbol sym){
+
+// Rule No. 15:<assignment> → <iden> <assignOp> <assignment_val>
+class ASSIGNMENT {
+
+    String iden;
+    ASSIGNMENTVAL assignment_val;
+
+    public ASSIGNMENT(Symbol lhs) {
+        iden = lhs.children.get(0).lexeme;
+        assignment_val = ASSIGNMENTVAL.construct(lhs.children.get(2));
+    }
+
+    public void interpret() {
+        Variable var = Variable.symbolTable.get(iden);
+        var.value = assignment_val.interpret();
+    }
+}
+
+abstract class ASSIGNMENTVAL {
+    public static ASSIGNMENTVAL construct(Symbol sym){
         switch (sym.ruleNo){
-            case 15:
-                return new INITVAL_1(sym);
             case 16:
-                return new INITVAL_2(sym);
-            default:
-                return null;
-        }
-    }
-    public abstract void interpret();
-}
-// Rule No. 15:<initVal> → <iden> <colon> <type> <assignOp> <expr>
-class INITVAL_1 extends INITVAL {
-    String iden;
-    EXPR expr;
-
-    public INITVAL_1(Symbol lhs) {
-        iden = lhs.children.get(0).lexeme;
-        expr = new EXPR(lhs.children.get(4));
-    }
-
-    @Override
-    public void interpret() {
-        Variable var = Variable.symbolTable.get(iden);
-        var.value = expr.interpret();
-    }
-}
-// Rule No. 16:<initVal> → ε
-class INITVAL_2 extends INITVAL {
-
-
-    public INITVAL_2(Symbol lhs) {
-        // rhs is EPSILON - default to null(???)
-    }
-
-    @Override
-    public void interpret() {
-    }
-}
-abstract class ASSIGNMENT {
-    public static ASSIGNMENT construct(Symbol sym){
-        switch (sym.ruleNo){
+                return new ASSIGNMENTVAL_1(sym);
             case 17:
-                return new ASSIGNMENT_1(sym);
-            case 18:
-                return new ASSIGNMENT_2(sym);
+                return new ASSIGNMENTVAL_2(sym);
             default:
                 return null;
         }
     }
-    public abstract void interpret();
+    public abstract Object interpret();
 }
-// Rule No. 17:<assignment> → <iden> <assignOp> <expr>
-class ASSIGNMENT_1 extends ASSIGNMENT{
+// Rule No. 16:<assignment_val> → <expr>
+class ASSIGNMENTVAL_1 extends ASSIGNMENTVAL{
 
     String iden;
     EXPR expr;
 
-    public ASSIGNMENT_1(Symbol lhs) {
-        iden = lhs.children.get(0).lexeme;
-        expr = new EXPR(lhs.children.get(2));
+    public ASSIGNMENTVAL_1(Symbol lhs) {
+        expr = new EXPR(lhs.children.get(0));
     }
     @Override
-    public void interpret() {
-        Variable var = Variable.symbolTable.get(iden);
-        var.value = expr.interpret();
-
+    public Object interpret() {
+        return expr.interpret();
     }
 }
-// Rule No. 18:<assignment> → <iden> <assignOp> <input>
-class ASSIGNMENT_2 extends ASSIGNMENT{
+// Rule No. 17:<assignment_val> → <input>
+class ASSIGNMENTVAL_2 extends ASSIGNMENTVAL{
 
-    String iden;
     INPUT input;
 
-
-    public ASSIGNMENT_2(Symbol lhs) {
-        iden = lhs.children.get(0).lexeme;
-        input = new INPUT(lhs.children.get(2));
+    public ASSIGNMENTVAL_2(Symbol lhs) {
+        input = new INPUT(lhs.children.get(0));
     }
     @Override
-    public void interpret() {
-        Variable var = Variable.symbolTable.get(iden);
-        var.value = input.interpret();
-
-
+    public Object interpret() {
+        return input.interpret();
     }
 }
 
-// Rule No. 19:<expr> → <expr2> <expr'>
-// Rule No. 20:<expr'> → <arithOp> <expr2> <expr'>
-// Rule No. 21:<expr'> → ε
-// Rule No. 22:<expr2> → <term> <expr2'>
-// Rule No. 23:<expr2'> → <arithOp> <term> <expr2'>
-// Rule No. 24:<expr2'> → ε
+
+// Rule No. 18:<expr> → <expr2> <expr'>
+// Rule No. 19:<expr'> → <arithOp> <expr2> <expr'>
+// Rule No. 20:<expr'> → ε
+// Rule No. 21:<expr2> → <term> <expr2'>
+// Rule No. 22:<expr2'> → <arithOp> <term> <expr2'>
+// Rule No. 23:<expr2'> → ε
 
 class EXPR {
     // DO NOT DELETE.
@@ -376,15 +358,23 @@ class EXPR {
 
     // See usage in LINE 192 and LINE 203 in MyInterpreter.java for your reference
        
+    public LinkedList<Symbol> copyExpression(LinkedList<Symbol> expression){
+        LinkedList<Symbol> copy = new LinkedList<>();
+        for(Symbol s:expression){
+        copy.add(s);
+    }
+        return copy;
+    }
     
-    LinkedList<Symbol> expression;
+    LinkedList<Symbol> expression_main;
     Stack<Integer> operands = new Stack();
 
     public EXPR(Symbol lhs) {
-        expression = Expression.getExpression(lhs);
+        expression_main = Expression.getExpression(lhs);
     }
 
     public int interpret() {
+        LinkedList<Symbol> expression = copyExpression(expression_main);
         Variable var;
         int result = 0;
 
@@ -393,13 +383,13 @@ class EXPR {
 
             switch (sym.type) {
                 // sym is an operand
-                case "<value>":
+                            
+                case "<number>":
                     operands.push(Integer.parseInt(sym.lexeme));
                     break;
 
                 case "<iden>":
                     var = Variable.symbolTable.get(sym.lexeme);
-
                     operands.push((Integer) var.value);
                     break;
 
@@ -432,7 +422,7 @@ class EXPR {
     }
 }
 
-// Rule No. 25:<if_stmt> → <if> <colon> <open_paren> <rel_expr> <close_paren> <then> <stmt_list'> <ifEnd>
+// Rule No. 24:<if_stmt> → <if> <colon> <open_paren> <rel_expr> <close_paren> <then> <stmt_list'> <ifEnd>
 class IF_STMT {
     STMT_LIST_PRIME stmt_list_prime;
     REL_EXPR rel_expr;
@@ -443,122 +433,64 @@ class IF_STMT {
     }
 
     public void interpret() {
-        rel_expr.interpret();
-        stmt_list_prime.interpret();
+        if (rel_expr.interpret()) {
+            stmt_list_prime.interpret();
+        }
     }
 }
-// Rule No. 26:<while_stmt> → <while> <colon> <open_paren> <rel_expr> <close_paren> <stmt_list'> <whileEnd>
+// Rule No. 25:<while_stmt> → <while> <colon> <open_paren> <rel_expr> <close_paren> <stmt_list'> <whileEnd>
 class WHILE_STMT{
     STMT_LIST_PRIME stmt_list_prime;
     REL_EXPR rel_expr;
     
     public WHILE_STMT(Symbol lhs) {
         rel_expr = new REL_EXPR(lhs.children.get(3));
-        stmt_list_prime = STMT_LIST_PRIME.construct(lhs.children.get(6));
+        stmt_list_prime = STMT_LIST_PRIME.construct(lhs.children.get(5));
     }
 
     public void interpret() {
-        rel_expr.interpret();
-        stmt_list_prime.interpret();
-    }
-}
-// Rule No. 27:<math_expr> → <term> <arithOp> <term>
-class MATH_EXPR {
-    EXPR term1;
-    String arithOp;
-    EXPR term2;
-    
-    
-    public MATH_EXPR(Symbol lhs) {
-        term1 = new EXPR(lhs.children.get(0));
-        arithOp = lhs.children.get(1).lexeme;
-        term2 = new EXPR(lhs.children.get(2));
-    }
-
-    public Object interpret() {
-        
-        int temp1 = term1.interpret();
-        int temp2 = term2.interpret();
-            
-            switch (arithOp) {
-                case "+": return temp1 + temp2;
-                case "-": return temp1 - temp2;
-                case "*": return temp1 - temp2;
-                case "/": return temp1 / temp2;              
-            }
-        return false;
+        while(rel_expr.interpret()) {
+            stmt_list_prime.interpret();
+        }
     }
 }
 
-
-// Rule No. 28:<rel_expr> → <term> <relOp> <term>
+// Rule No. 26:<rel_expr> → <term> <relOp> <term>
 class REL_EXPR  {
     TERM term1;
     String relOp;
     TERM term2;
-    Symbol lhs;
+
     
     public REL_EXPR(Symbol lhs) {
-        this.lhs = lhs;
         term1 = TERM.construct(lhs.children.get(0));
         relOp = lhs.children.get(1).lexeme;
         term2 = TERM.construct(lhs.children.get(2));
     }
 
     public boolean interpret() {
-        Object temp1;
-        Object temp2;
-        switch (lhs.children.get(0).type) {
-            case "<value>":
-                if (term1.interpret() instanceof Integer && term2.interpret() instanceof Integer){
-                    temp1 = (int)term1.interpret();
-                    temp2 = (int)term2.interpret();
+        int rel1 = Integer.parseInt(term1.interpret().toString());
+        int rel2 = Integer.parseInt(term2.interpret().toString());
                     
-                    switch (relOp) {
-                        case ">": return temp1 > temp2;
-                        case "<": return temp1 < temp2;
-                        case "<>": return temp1 != temp2;
-                        case "=": return temp1 == temp2;
-                        case ">=": return temp1 >= temp2;
-                        case "<=": return temp1 <= temp2;
-                    }
-                } else if(term1.interpret() instanceof Double && term2.interpret() instanceof Double){
-                    temp1 = new Double(term1.interpret().toString());
-                    temp2 = new Double(term2.interpret().toString());
-                    
-                    switch (relOp) {
-                        case ">": return temp1 > temp2;
-                        case "<": return temp1 < temp2;
-                        case "<>": return temp1 != temp2;
-                        case "=": return temp1 == temp2;
-                        case ">=": return temp1 >= temp2;
-                        case "<=": return temp1 <= temp2;
-                    }
-                }   break;
-            case "<iden>":
-                switch (relOp) {
-                    
-                    case ">": return temp1 > temp2;
-                    case "<": return temp1 < temp2;
-                    case "<>": return temp1 != temp2;
-                    case "=": return temp1 == temp2;
-                    case ">=": return temp1 >= temp2;
-                    case "<=": return temp1 <= temp2;
-                }
-            default:
-                return false;
+        switch (relOp) {
+            case ">": return rel1 > rel2;
+            case "<": return rel1 < rel2;
+            case "<>": return rel1 != rel2;
+            case "=": return rel1 == rel2;
+            case ">=": return rel1 >= rel2;
+            case "<=": return rel1 <= rel2;
         }
         return false;
         
     }
 }
 
-// Rule No. 29:<input> → <scan> <open_paren> <close_paren>
+// Rule No. 267:<input> → <scan> <open_paren> <close_paren>
 class INPUT {
     Scanner scan = new Scanner(System.in);
 
     public INPUT(Symbol lhs) {
-        
+        //
     }
 
     public Object interpret() {
@@ -566,7 +498,7 @@ class INPUT {
         return var;
     }
 }
-// Rule No. 30:<output> → <print> <open_paren> <term> <close_paren>
+// Rule No. 28:<output> → <print> <open_paren> <term> <close_paren>
 class OUTPUT {
     TERM term;
 
@@ -575,9 +507,6 @@ class OUTPUT {
     }
 
     public void interpret() {
-        System.out.print(term.interpret());
+        System.out.println(term.interpret());
     }
 }
-
-
-

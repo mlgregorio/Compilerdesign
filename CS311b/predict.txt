@@ -1,30 +1,28 @@
 1	<program> → <iden> <colon> <main> <start> <stmt_list> <end>	<iden>
-2	<stmt_list> → <stmt> <stmt_list'>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>
-3	<stmt_list'> → <stmt> <stmt_list'>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>
+2	<stmt_list> → <stmt> <stmt_list'>	<var>, <if>, <print>, <iden>, <while>
+3	<stmt_list'> → <stmt> <stmt_list'>	<var>, <if>, <print>, <iden>, <while>
 4	<stmt_list'> → ε	<whileEnd>, <ifEnd>, <end>
 5	<stmt> → <declaration>	<var>
 6	<stmt> → <assignment>	<iden>
 7	<stmt> → <if_stmt>	<if>
-8	<stmt> → <math_expr>	<iden>, <value>
-9	<stmt> → <while_stmt>	<while>
-10	<stmt> → <input>	<scan>
-11	<stmt> → <output>	<print>
-12	<term> → <iden>	<iden>
-13	<term> → <value>	<value>
-14	<declaration> → <var> <initVal>	<var>
-15	<initVal> → <iden> <colon> <type> <assignOp> <expr>	<iden>
-16	<initVal> → ε	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-17	<assignment> → <iden> <assignOp> <expr>	<iden>
-18	<assignment> → <iden> <assignOp> <input>	<iden>
-19	<expr> → <expr2> <expr'>	<iden>, <value>
-20	<expr'> → <arithOp> <expr2> <expr'>	<arithOp>
-21	<expr'> → ε	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-22	<expr2> → <term> <expr2'>	<iden>, <value>
-23	<expr2'> → <arithOp> <term> <expr2'>	<arithOp>
-24	<expr2'> → ε	<arithOp>, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-25	<if_stmt> → <if> <colon> <open_paren> <rel_expr> <close_paren> <then> <stmt_list'> <ifEnd>	<if>
-26	<while_stmt> → <while> <colon> <open_paren> <rel_expr> <close_paren> <stmt_list'> <whileEnd>	<while>
-27	<math_expr> → <expr>	<iden>, <value>
-28	<rel_expr> → <term> <relOp> <term>	<iden>, <value>
-29	<input> → <scan> <open_paren> <close_paren>	<scan>
-30	<output> → <print> <open_paren> <term> <close_paren>	<print>
+8	<stmt> → <while_stmt>	<while>
+9	<stmt> → <output>	<print>
+10	<term> → <iden>	<iden>
+11	<term> → <value>	<str>, <number>
+12	<value> → <str>	<str>
+13	<value> → <number>	<number>
+14	<declaration> → <var> <iden> <colon> <type>	<var>
+15	<assignment> → <iden> <assignOp> <assignment_val>	<iden>
+16	<assignment_val> → <expr>	<iden>, <str>, <number>
+17	<assignment_val> → <input>	<scan>
+18	<expr> → <expr2> <expr'>	<iden>, <str>, <number>
+19	<expr'> → <arithOp> <expr2> <expr'>	<arithOp>
+20	<expr'> → ε	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+21	<expr2> → <term> <expr2'>	<iden>, <str>, <number>
+22	<expr2'> → <arithOp> <term> <expr2'>	<arithOp>
+23	<expr2'> → ε	<arithOp>, <var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+24	<if_stmt> → <if> <colon> <open_paren> <rel_expr> <close_paren> <then> <stmt_list'> <ifEnd>	<if>
+25	<while_stmt> → <while> <colon> <open_paren> <rel_expr> <close_paren> <stmt_list'> <whileEnd>	<while>
+26	<rel_expr> → <term> <relOp> <term>	<iden>, <str>, <number>
+27	<input> → <scan> <open_paren> <close_paren>	<scan>
+28	<output> → <print> <open_paren> <term> <close_paren>	<print>

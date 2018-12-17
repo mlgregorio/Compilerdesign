@@ -4,7 +4,8 @@
 <start>	<start>
 <end>	<end>
 ε	ε
-<value>	<value>
+<str>	<str>
+<number>	<number>
 <var>	<var>
 <type>	<type>
 <assignOp>	<assignOp>
@@ -20,10 +21,10 @@
 <scan>	<scan>
 <print>	<print>
 <program>	<iden>
-<stmt_list'>	ε, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>
-<term>	<iden>, <value>
+<stmt_list'>	ε, <var>, <if>, <print>, <iden>, <while>
+<term>	<iden>, <str>, <number>
+<value>	<str>, <number>
 <declaration>	<var>
-<initVal>	<iden>, ε
 <assignment>	<iden>
 <expr'>	<arithOp>, ε
 <expr2'>	<arithOp>, ε
@@ -31,9 +32,9 @@
 <while_stmt>	<while>
 <input>	<scan>
 <output>	<print>
-<stmt>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>
-<expr2>	<iden>, <value>
-<rel_expr>	<iden>, <value>
-<expr>	<iden>, <value>
-<math_expr>	<iden>, <value>
-<stmt_list>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>
+<stmt>	<var>, <if>, <print>, <iden>, <while>
+<expr2>	<iden>, <str>, <number>
+<rel_expr>	<iden>, <str>, <number>
+<expr>	<iden>, <str>, <number>
+<stmt_list>	<var>, <if>, <print>, <iden>, <while>
+<assignment_val>	<iden>, <str>, <number>, <scan>

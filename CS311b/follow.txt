@@ -1,18 +1,18 @@
 <program>	$
 <stmt_list>	<end>
 <stmt_list'>	<whileEnd>, <ifEnd>, <end>
-<stmt>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<term>	<close_paren>, <relOp>, <arithOp>, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<declaration>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<initVal>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<assignment>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<expr>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<expr'>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<expr2>	<arithOp>, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<expr2'>	<arithOp>, <var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<if_stmt>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<while_stmt>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<math_expr>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
+<stmt>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<term>	<close_paren>, <relOp>, <arithOp>, <var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<value>	<close_paren>, <relOp>, <arithOp>, <var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<declaration>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<assignment>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<assignment_val>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<expr>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<expr'>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<expr2>	<arithOp>, <var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<expr2'>	<arithOp>, <var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<if_stmt>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<while_stmt>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
 <rel_expr>	<close_paren>
-<input>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
-<output>	<var>, <if>, <while>, <print>, <iden>, <scan>, <value>, <whileEnd>, <ifEnd>, <end>
+<input>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
+<output>	<var>, <if>, <print>, <iden>, <while>, <whileEnd>, <ifEnd>, <end>
