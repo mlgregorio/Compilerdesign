@@ -1,14 +1,17 @@
 program:Main
     start
+        print("HI, this is MBLUE Programming Language")
+        print("Please Enter a number that will be evaluated if its greater than 6: ")
         var num:int 
-        num := scan()
         var num1:int
-        num1 := 6
-        print(num)
+        num := scan()
+        num1 := 10
+        print("it will display 'YES' if the input is greater that 10")
         if:(num1 > num)
         then
-        print("Yes")
+            print("Yes")
         fi
+        print("This will display 'its done' until the its less than 10")
         while:(num < num1)
             print("its done")
             num1 := num1 - 1
